@@ -1,2 +1,394 @@
-# Notey.github.io
+# <!DOCTYPE html>
+
+# <html lang="en"><head><meta charset="utf-8">
+
+# <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+# <title>LedgerPro Accounting</title>
+
+# <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600\&family=Public+Sans:wght@400;500;600\&display=swap" rel="stylesheet">
+
+# <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+# <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+# <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+# <style>
+
+# :root{--bg:#f1f4f1;--sf:#fff;--tx:#17212b;--mu:#667585;--bd:#dde4e0;--pr:#0e7c66;--pt:#e2f2ed;--sb:#12263a;--dn:#c0392b;--wn:#b8862b;--hv:#f5f8f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+# @media(prefers-color-scheme:dark){:root:not(\[data-theme="light"]){--bg:#0e161d;--sf:#16212b;--tx:#e5ecf1;--mu:#8fa0ae;--bd:#27343f;--pr:#2fc29f;--pt:#14352e;--sb:#0a1118;--dn:#ef6b5c;--wn:#e0b04f;--hv:#1b2833}}
+
+# :root\[data-theme="dark"]{--bg:#0e161d;--sf:#16212b;--tx:#e5ecf1;--mu:#8fa0ae;--bd:#27343f;--pr:#2fc29f;--pt:#14352e;--sb:#0a1118;--dn:#ef6b5c;--wn:#e0b04f;--hv:#1b2833}
+
+# html{scroll-padding-top:env(safe-area-inset-top,0px)}\*{box-sizing:border-box}\[hidden]{display:none!important}
+
+# body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 'Public Sans',system-ui,sans-serif;font-variant-numeric:tabular-nums}
+
+# .app{display:flex;min-height:100vh}
+
+# \#nav{width:216px;background:var(--sb);color:#cfd9e2;padding:18px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:2px;flex:none}
+
+# .lg{font:600 24px Newsreader,serif;color:#fff;padding:4px 10px 16px}.lg i{color:#4fd1b0;font-style:normal}.lg small{display:block;font:400 12px 'Public Sans',sans-serif;color:#8fa3b5;margin-top:2px}
+
+# \#nav button{background:none;border:0;color:inherit;font:inherit;text-align:left;padding:9px 12px;border-radius:8px;cursor:pointer;display:flex;gap:10px;align-items:center}
+
+# \#nav button:hover{background:#1c3550}#nav button.on{background:#1c3550;color:#fff;box-shadow:inset 3px 0 #4fd1b0}
+
+# .rl{margin-top:auto;font-size:12px;color:#8fa3b5;padding:8px 12px}
+
+# main{flex:1;min-width:0;padding:26px 30px;max-width:1300px}
+
+# .ph{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+
+# h1{font:600 30px Newsreader,serif;margin:0}h3{font:600 19px Newsreader,serif;margin:0 0 12px}
+
+# .tb{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}.tb input,.tb select{width:auto;margin:0}.tb label{margin:0}
+
+# .bt{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:8px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500}
+
+# .bt:hover{background:var(--hv)}.bt.p{background:var(--pr);border-color:var(--pr);color:#fff}.bt.p:hover{filter:brightness(1.1)}
+
+# button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--pr);outline-offset:1px}
+
+# .card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px}.pad{padding:16px 18px}
+
+# .kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:14px}
+
+# .k{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}.k span{color:var(--mu);font-size:12.5px}.k b{display:block;font:600 28px Newsreader,serif;margin-top:2px}
+
+# .tw{overflow-x:auto}table{width:100%;border-collapse:collapse}
+
+# th{text-align:left;font-weight:600;font-size:12.5px;color:var(--mu);padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--hv);white-space:nowrap}
+
+# td{padding:9px 14px;border-bottom:1px solid var(--bd)}tr:last-child td{border:0}tr:hover td{background:var(--hv)}
+
+# .r{text-align:right}tr.b td{font-weight:600}.em{text-align:center;color:var(--mu);padding:28px}.ac{white-space:nowrap;text-align:right}
+
+# .lk{background:none;border:0;color:var(--pr);cursor:pointer;font:inherit;font-weight:500;padding:2px 6px}.lk:hover{text-decoration:underline}.lk.d{color:var(--dn)}
+
+# .bd{padding:2px 9px;border-radius:99px;font-size:12px;font-weight:500;background:var(--pt);color:var(--pr)}
+
+# .bd.Overdue{background:rgba(192,57,43,.14);color:var(--dn)}.bd.Partial{background:rgba(184,134,43,.16);color:var(--wn)}
+
+# .bd.Void,.bd.Reversal,.bd.Inactive{background:var(--hv);color:var(--mu)}.bd.Open{background:rgba(60,120,200,.14);color:#3b78c4}
+
+# .ov{position:fixed;inset:0;background:rgba(10,17,24,.55);display:flex;align-items:flex-start;justify-content:center;padding:5vh 12px;overflow:auto;z-index:20}
+
+# .mc{background:var(--sf);border-radius:14px;padding:22px;width:min(660px,100%)}.mc h3{font-size:22px}
+
+# .ft{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+
+# label{display:block;font-size:12.5px;color:var(--mu);margin-bottom:10px}
+
+# input,select{display:block;width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font:inherit}
+
+# .gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px}
+
+# .jt td,.jt th{padding:4px 6px}.jt input,.jt select{margin:0}
+
+# \#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--sb);color:#fff;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:30}
+
+# \#toast.show{opacity:1;transform:translate(-50%,0)}
+
+# .ok{color:var(--pr)}.dn{color:var(--dn)}.mu{color:var(--mu)}
+
+# @media(max-width:820px){.app{flex-direction:column}#nav{position:static;width:auto;height:auto;flex-direction:row;overflow-x:auto;padding:8px}.lg,.rl{display:none}main{padding:16px}}
+
+# </style></head><body>
+
+# <div class="app"><nav id="nav"></nav><main id="main"></main></div><div id="md"></div><div id="toast"></div>
+
+# <script>
+
+# const $=s=>document.querySelector(s),KEY='ledgerpro\_v1',TY=\['Asset','Liability','Equity','Income','Expense'],SYS=\[1100,2000,2100];
+
+# const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+
+# const today=()=>iso(new Date()),add=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return iso(d)};
+
+# const ago=n=>{const d=new Date();d.setDate(15);d.setMonth(d.getMonth()-n);return iso(d)};
+
+# const uid=()=>Math.random().toString(36).slice(2,10),r2=n=>Math.round(n\*100)/100;
+
+# const e=s=>String(s??'').replace(/\[\&<>"]/g,c=>({'\&':'\&amp;','<':'\&lt;','>':'\&gt;','"':'\&quot;'}\[c]));
+
+# let S,view='dash',q='',CUR,DR,JL=\[],tt,RP={k:'tb',acct:''},per={from:today().slice(0,4)+'-01-01',to:today()};
+
+# const fm=n=>(n<0?'-':'')+S.co.cur+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+# const toast=t=>{const x=$('#toast');x.textContent=t;x.className='show';clearTimeout(tt);tt=setTimeout(()=>x.className='',3200)};
+
+# const v=id=>$('#'+id).value;
+
+# const SEED=\[\[1000,'Cash at Bank','Asset'],\[1100,'Accounts Receivable','Asset'],\[1200,'Inventory','Asset'],\[1500,'Equipment','Asset'],\[2000,'Accounts Payable','Liability'],\[2100,'Sales Tax Payable','Liability'],\[2500,'Loans Payable','Liability'],\[3000,'Owner Equity','Equity'],\[4000,'Sales Revenue','Income'],\[4100,'Service Revenue','Income'],\[5000,'Cost of Goods Sold','Expense'],\[6000,'Rent','Expense'],\[6100,'Salaries and Wages','Expense'],\[6200,'Utilities','Expense'],\[6300,'Office Supplies','Expense'],\[6400,'Marketing','Expense']];
+
+# const fresh=()=>({co:{name:'My Company Ltd',cur:'$',tax:10,lock:'',role:'Admin',inv:1001,bill:1,jn:0},accts:SEED.map((\[code,name,type])=>({id:uid(),code,name,type,on:1})),je:\[],docs:\[],log:\[]});
+
+# try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}
+
+# if(!S||!S.accts)S=fresh();
+
+# const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}};
+
+# const log=t=>{S.log.push({t:new Date().toISOString().slice(0,19).replace('T',' '),u:S.co.role,m:t});if(S.log.length>500)S.log.shift()};
+
+# const gd=()=>S.co.role==='Viewer'?(toast('The Viewer role is read-only'),false):true;
+
+# const ad=()=>S.co.role==='Admin'?true:(toast('This needs the Admin role'),false);
+
+# const chk=d=>S.co.lock\&\&d<=S.co.lock?(toast('Books are locked through '+S.co.lock),false):true;
+
+# const ACC=id=>S.accts.find(a=>a.id===id),BC=c=>S.accts.find(a=>a.code==c),AS=()=>\[...S.accts].sort((a,b)=>a.code-b.code);
+
+# const act=(...t)=>AS().filter(a=>a.on\&\&t.includes(a.type)),dr=a=>a.type==='Asset'||a.type==='Expense';
+
+# const opt=(L,s)=>L.map(a=>`<option value="${a.id}"${a.id===s?' selected':''}>${a.code} ${e(a.name)}</option>`).join('');
+
+# const jn=x=>'JE-'+String(x.no).padStart(4,'0'),used=id=>S.je.some(j=>j.lines.some(l=>l.a===id));
+
+# function sum(id,f,t){let d=0,c=0;S.je.forEach(x=>{if((!f||x.date>=f)\&\&(!t||x.date<=t))x.lines.forEach(l=>{if(l.a===id){d+=l.d;c+=l.c}})});return\[d,c]}
+
+# const nb=(a,f,t)=>{const\[d,c]=sum(a.id,f,t);return r2(dr(a)?d-c:c-d)};
+
+# function post(date,ref,memo,lines,src){if(!chk(date))return null;const d=r2(lines.reduce((s,l)=>s+l.d,0)),c=r2(lines.reduce((s,l)=>s+l.c,0));if(d!==c||!d){toast('Debits must equal credits');return null}const x={id:uid(),no:++S.co.jn,date,ref,memo,lines,src,void:0};S.je.push(x);log('Posted '+jn(x)+' '+(memo||ref||''));return x}
+
+# function rev(x){if(!chk(x.date))return false;x.void=1;S.je.push({id:uid(),no:++S.co.jn,date:x.date,ref:x.ref,memo:'Reversal of '+jn(x),lines:x.lines.map(l=>({a:l.a,d:l.c,c:l.d})),src:'rev',rev:x.id});log('Voided '+jn(x));return true}
+
+# /\* ---------- modal helpers ---------- \*/
+
+# function modal(t,b,ok,lb){$('#md').innerHTML=`<div class="ov"><div class="mc" role="dialog" aria-modal="true"><h3>${t}</h3>${b}<div class="ft"><button class="bt" onclick="cm()">${ok?'Cancel':'Close'}</button>${ok?'<button class="bt p" id="mok">'+(lb||'Save')+'</button>':''}</div></div></div>`;if(ok)$('#mok').onclick=()=>{if(ok()!==false)cm()};const f=$('#md input,#md select');f\&\&f.focus()}
+
+# const cm=()=>{$('#md').innerHTML=''},ask=(msg,fn)=>modal('Please confirm',`<p>${msg}</p>`,()=>{fn()},'Confirm');
+
+# document.addEventListener('keydown',ev=>{if(ev.key==='Escape')cm();if(ev.key==='Enter'\&\&ev.target.tagName==='INPUT'\&\&ev.target.closest('#md')\&\&$('#mok'))$('#mok').click()});
+
+# /\* ---------- export ---------- \*/
+
+# async function dlf(name,data){let D=null;try{D=await claude.use('downloads')}catch(x){}
+
+# if(D){try{await D.save({filename:name,data});toast('Saved '+name)}catch(x){if(!x||x.code!=='declined')toast('Could not save the file here ('+((x\&\&x.code)||'error')+')')}}
+
+# else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(\[data]));a.download=name;document.body.appendChild(a);a.click();a.remove()}}
+
+# const fn2=T=>T.title.replace(/\\W+/g,'\_')+'\_'+today();
+
+# function xls(T){T=T.x||T;const wb=XLSX.utils.book\_new();XLSX.utils.book\_append\_sheet(wb,XLSX.utils.aoa\_to\_sheet(\[T.head,...T.rows]),T.title.slice(0,30));dlf(fn2(T)+'.xlsx',XLSX.write(wb,{type:'array',bookType:'xlsx'}))}
+
+# function pdf(T){T=T.x||T;const{jsPDF}=window.jspdf,d=new jsPDF({orientation:T.head.length>6?'l':'p'}),n=T.n||\[],cs={};n.forEach(i=>cs\[i]={halign:'right'});d.setFontSize(16);d.text(S.co.name,14,16);d.setFontSize(11);d.text(T.title+(T.sub?'  |  '+T.sub:''),14,23);d.setFontSize(8);d.text('Generated '+today(),14,28);
+
+# d.autoTable({startY:32,head:\[T.head],body:T.rows.map(r=>r.map((x,i)=>n.includes(i)\&\&typeof x==='number'?x.toFixed(2):x)),styles:{fontSize:8},headStyles:{fillColor:\[14,124,102]},columnStyles:cs});dlf(fn2(T)+'.pdf',d.output('arraybuffer'))}
+
+# function allX(){const wb=XLSX.utils.book\_new();\[tAcc(),tJE(),tJL(),tDocs('inv'),tDocs('bill'),tTB(),tPL(),tBS(),tAge('inv'),tAge('bill')].forEach(T=>XLSX.utils.book\_append\_sheet(wb,XLSX.utils.aoa\_to\_sheet(\[T.head,...T.rows]),T.title.slice(0,30)));dlf('LedgerPro\_all\_data\_'+today()+'.xlsx',XLSX.write(wb,{type:'array',bookType:'xlsx'}))}
+
+# function docPdf(id){const x=S.docs.find(z=>z.id===id),{jsPDF}=window.jspdf,d=new jsPDF(),inv=x.type==='inv';d.setFontSize(22);d.text(inv?'INVOICE':'BILL',14,20);d.setFontSize(11);d.text(S.co.name,14,30);d.text(`No: ${x.no}\\nDate: ${x.date}\\nDue: ${x.due}\\n${inv?'Bill to':'Vendor'}: ${x.contact}\\nCurrency: ${S.co.cur}`,14,40);
+
+# d.autoTable({startY:72,head:\[\['Description','Qty','Unit price','Amount']],body:\[\[x.desc,x.qty,x.price.toFixed(2),x.net.toFixed(2)]],foot:\[\['','','Tax '+x.tax+'%',x.taxamt.toFixed(2)],\['','','Total',x.total.toFixed(2)],\['','','Paid',x.paid.toFixed(2)],\['','','Balance due',r2(x.total-x.paid).toFixed(2)]],headStyles:{fillColor:\[14,124,102]},footStyles:{fillColor:\[240,243,241],textColor:20}});dlf(x.no+'.pdf',d.output('arraybuffer'))}
+
+# /\* ---------- table builders ---------- \*/
+
+# function table(T,idx,ra){const n=T.n||\[];return`<div class="tw"><table><thead><tr>${T.head.map((h,i)=>`<th class="${n.includes(i)?'r':''}">${e(h)}</th>`).join('')}${ra?'<th></th>':''}</tr></thead><tbody>${T.rows.map((r,i)=>`<tr class="${(T.b||\[]).includes(i)?'b':''}">${r.map((x,j)=>n.includes(j)?`<td class="r">${typeof x==='number'?fm(x):''}</td>`:T.head\[j]==='Status'?`<td><span class="bd ${x}">${x}</span></td>`:`<td>${e(x)}</td>`).join('')}${ra?`<td class="ac">${ra(idx\[i])}</td>`:''}</tr>`).join('')||'<tr><td class="em" colspan="12">Nothing here yet.</td></tr>'}</tbody></table></div>`}
+
+# function list(T,ra){const idx=T.rows.map((\_,i)=>i).filter(i=>!q||T.rows\[i].join(' ').toLowerCase().includes(q.toLowerCase()));return table({...T,rows:idx.map(i=>T.rows\[i])},idx,ra)}
+
+# const hd=(t,b)=>`<div class="ph"><h1>${t}</h1><div class="tb">${b||''}</div></div>`;
+
+# const sr=()=>`<input placeholder="Search…" value="${e(q)}" oninput="q=this.value;$('#tbl').innerHTML=DR()" aria-label="Search">`;
+
+# const ex='<button class="bt" onclick="xls(CUR)">Excel</button><button class="bt" onclick="pdf(CUR)">PDF</button>';
+
+# const grp=(ty,f,t)=>{const r=\[];let s=0;AS().filter(a=>ty.includes(a.type)).forEach(a=>{const z=nb(a,f,t);if(Math.abs(z)>=.005){r.push(\['\\u00a0\\u00a0\\u00a0'+a.name,z]);s=r2(s+z)}});return\[r,s]};
+
+# const bo=rows=>rows.reduce((a,r,i)=>r\[0]\[0]!=='\\u00a0'?a.concat(i):a,\[]);
+
+# const st=x=>x.void?'Void':x.total-x.paid<.005?'Paid':x.due<today()?'Overdue':x.paid>0?'Partial':'Open';
+
+# function tDocs(type){const D=S.docs.filter(x=>x.type===type).sort((a,b)=>b.date.localeCompare(a.date)||b.no.localeCompare(a.no));return{title:type==='inv'?'Sales Invoices':'Purchase Bills',head:\['No','Date','Due','Contact','Description','Total','Paid','Balance','Status'],rows:D.map(x=>\[x.no,x.date,x.due,x.contact,x.desc,x.total,x.paid,r2(x.total-x.paid),st(x)]),n:\[5,6,7],D}}
+
+# function tJE(){const L=\[...S.je].sort((a,b)=>b.date.localeCompare(a.date)||b.no-a.no);return{title:'Journal Entries',head:\['No','Date','Ref','Memo','Amount','Status'],rows:L.map(x=>\[jn(x),x.date,x.ref||'',x.memo||'',r2(x.lines.reduce((s,l)=>s+l.d,0)),x.void?'Void':x.rev?'Reversal':'Posted']),n:\[4],L}}
+
+# function tJL(){const rows=\[];\[...S.je].sort((a,b)=>a.date.localeCompare(b.date)||a.no-b.no).forEach(x=>x.lines.forEach(l=>{const a=ACC(l.a);rows.push(\[x.date,x.ref||jn(x),x.memo||'',a?a.code+'':'',a?a.name:'',l.d,l.c])}));return{title:'Journal Lines',head:\['Date','Ref','Description','Account','Account name','Debit','Credit'],rows,n:\[5,6]}}
+
+# function tAcc(){const L=AS();return{title:'Chart of Accounts',head:\['Code','Name','Type','Balance','Status'],rows:L.map(a=>\[a.code+'',a.name,a.type,nb(a),a.on?'Active':'Inactive']),n:\[3],L}}
+
+# function tTB(){let D=0,C=0;const rows=\[];AS().forEach(a=>{const\[d,c]=sum(a.id,'',per.to),z=r2(d-c);if(!z)return;const p=z>0?z:0,m=z<0?-z:0;D+=p;C+=m;rows.push(\[a.code+'',a.name,a.type,p||'',m||''])});D=r2(D);C=r2(C);rows.push(\['','TOTAL','',D,C]);return{title:'Trial Balance',sub:'as of '+per.to,head:\['Code','Account','Type','Debit','Credit'],rows,n:\[3,4],b:\[rows.length-1],note:D===C?'Debits equal credits. The books are in balance.':'Out of balance by '+fm(D-C)}}
+
+# function tPL(){const\[I,ti]=grp(\['Income'],per.from,per.to),\[X,tx]=grp(\['Expense'],per.from,per.to),rows=\[\['INCOME',''],...I,\['Total income',ti],\['EXPENSES',''],...X,\['Total expenses',tx],\['NET INCOME',r2(ti-tx)]];return{title:'Profit and Loss',sub:per.from+' to '+per.to,head:\['Account','Amount'],rows,n:\[1],b:bo(rows)}}
+
+# function tBS(){const t=per.to,\[A,ta]=grp(\['Asset'],'',t),\[L,tl]=grp(\['Liability'],'',t),\[Q,tq]=grp(\['Equity'],'',t),ne=r2(grp(\['Income'],'',t)\[1]-grp(\['Expense'],'',t)\[1]),rows=\[\['ASSETS',''],...A,\['Total assets',ta],\['LIABILITIES',''],...L,\['Total liabilities',tl],\['EQUITY',''],...Q,\['\\u00a0\\u00a0\\u00a0Net income to date',ne],\['Total equity',r2(tq+ne)],\['TOTAL LIABILITIES AND EQUITY',r2(tl+tq+ne)]];return{title:'Balance Sheet',sub:'as of '+t,head:\['Account','Amount'],rows,n:\[1],b:bo(rows)}}
+
+# function tGL(id){const a=ACC(id),rows=\[];if(a){let run=0;\[...S.je].sort((x,y)=>x.date.localeCompare(y.date)||x.no-y.no).forEach(x=>x.lines.filter(l=>l.a===id).forEach(l=>{run=r2(run+(dr(a)?l.d-l.c:l.c-l.d));if((!per.from||x.date>=per.from)\&\&(!per.to||x.date<=per.to))rows.push(\[x.date,jn(x),x.memo||'',l.d||'',l.c||'',run])}))}return{title:'General Ledger',sub:(a?a.code+' '+a.name+', ':'')+per.from+' to '+per.to,head:\['Date','No','Memo','Debit','Credit','Balance'],rows,n:\[3,4,5]}}
+
+# function tAge(type){const R={};S.docs.filter(x=>x.type===type\&\&!x.void\&\&x.total-x.paid>.005).forEach(x=>{const days=Math.floor((Date.parse(today())-Date.parse(x.due))/864e5),k=days<=0?1:days<=30?2:days<=60?3:4,r=R\[x.contact]||(R\[x.contact]=\[x.contact,0,0,0,0,0]),b=r2(x.total-x.paid);r\[k]=r2(r\[k]+b);r\[5]=r2(r\[5]+b)});const rows=Object.values(R),T=\['TOTAL',0,0,0,0,0];rows.forEach(r=>{for(let i=1;i<6;i++)T\[i]=r2(T\[i]+r\[i])});rows.push(T);return{title:type==='inv'?'Receivables Aging':'Payables Aging',sub:'as of '+today(),head:\['Contact','Current','1-30 days','31-60 days','Over 60','Total'],rows,n:\[1,2,3,4,5],b:\[rows.length-1]}}
+
+# /\* ---------- documents (invoices and bills) ---------- \*/
+
+# const fin=f=>{f.net=r2(f.qty\*f.price);f.taxamt=r2(f.net\*f.tax/100);f.total=r2(f.net+f.taxamt);return f};
+
+# function dl(type,f){const AR=BC(1100).id,AP=BC(2000).id,TX=BC(2100).id;return type==='inv'?\[{a:AR,d:f.total,c:0},{a:f.acct,d:0,c:f.net},...(f.taxamt?\[{a:TX,d:0,c:f.taxamt}]:\[])]:\[{a:f.acct,d:f.net,c:0},...(f.taxamt?\[{a:TX,d:f.taxamt,c:0}]:\[]),{a:AP,d:0,c:f.total}]}
+
+# function mkDoc(type,f){fin(f);if(!chk(f.date))return null;const no=type==='inv'?'INV-'+S.co.inv:'BILL-'+String(S.co.bill).padStart(4,'0'),j=post(f.date,no,f.contact+' - '+f.desc,dl(type,f),'doc');if(!j)return null;type==='inv'?S.co.inv++:S.co.bill++;const d={id:uid(),type,no,...f,paid:0,pays:\[],je:j.id};S.docs.push(d);return d}
+
+# function upDoc(x,f){fin(f);if(x.pays.length\&\&f.total!==x.total){toast('This document has payments. Void it and re-issue it to change the amount.');return false}if(!chk(x.date)||!chk(f.date))return false;Object.assign(x,f);Object.assign(S.je.find(z=>z.id===x.je),{date:f.date,memo:f.contact+' - '+f.desc,lines:dl(x.type,f)});log('Edited '+x.no);sv();render()}
+
+# function payDoc(x,date,a,bk){const inv=x.type==='inv',AR=BC(1100).id,AP=BC(2000).id,j=post(date,x.no,'Payment '+x.no+' '+x.contact,inv?\[{a:bk,d:a,c:0},{a:AR,d:0,c:a}]:\[{a:AP,d:a,c:0},{a:bk,d:0,c:a}],'pay');if(!j)return false;x.paid=r2(x.paid+a);x.pays.push({date,amt:a,je:j.id});return true}
+
+# function vDocs(type){const T=tDocs(type),inv=type==='inv',live=T.D.filter(x=>!x.void),out=r2(live.reduce((s,x)=>s+x.total-x.paid,0)),od=r2(live.filter(x=>st(x)==='Overdue').reduce((s,x)=>s+x.total-x.paid,0));CUR=T;
+
+# DR=()=>list(T,i=>{const x=T.D\[i];if(x.void)return'';return(x.total-x.paid>.005?`<button class="lk" onclick="payForm('${x.id}')">${inv?'Receive':'Pay'}</button>`:'')+`<button class="lk" onclick="docPdf('${x.id}')">PDF</button><button class="lk" onclick="docForm('${type}','${x.id}')">Edit</button><button class="lk d" onclick="voidDoc('${x.id}')">Void</button>`});
+
+# return hd(inv?'Sales':'Purchases',sr()+ex+`<button class="bt p" onclick="docForm('${type}')">${inv?'New invoice':'New bill'}</button>`)+`<div class="kp"><div class="k"><span>${inv?'Money owed to you':'Money you owe'}</span><b>${fm(out)}</b></div><div class="k"><span>Overdue</span><b class="${od?'dn':''}">${fm(od)}</b></div><div class="k"><span>${inv?'Invoices':'Bills'} issued</span><b>${live.length}</b></div></div><div class="card" id="tbl">${DR()}</div>`}
+
+# function docForm(type,id){if(!gd())return;const inv=type==='inv',x=id\&\&S.docs.find(z=>z.id===id),C=\[...new Set(S.docs.filter(z=>z.type===type).map(z=>z.contact))],AL=inv?act('Income'):act('Expense','Asset').filter(a=>a.code!=1100);
+
+# modal((x?'Edit ':'New ')+(inv?'invoice':'bill'),`<label>${inv?'Customer':'Vendor'}<input id="dc" list="cl" autocomplete="off" value="${e(x?x.contact:'')}"><datalist id="cl">${C.map(c=>`<option value="${e(c)}">`).join('')}</datalist></label><div class="gr"><label>Date<input type="date" id="dd" value="${x?x.date:today()}"></label><label>Due date<input type="date" id="du" value="${x?x.due:add(today(),30)}"></label></div><label>Description<input id="dx" value="${e(x?x.desc:'')}"></label><div class="gr"><label>Quantity<input type="number" id="dq" step="any" value="${x?x.qty:1}" oninput="dtot()"></label><label>Unit price<input type="number" id="dp" step="0.01" value="${x?x.price:''}" oninput="dtot()"></label><label>Tax %<input type="number" id="dt" step="any" value="${x?x.tax:S.co.tax}" oninput="dtot()"></label></div><label>${inv?'Income account':'Expense account'}<select id="da">${opt(AL,x\&\&x.acct)}</select></label><p id="dtt"></p>`,()=>{
+
+# const f={contact:v('dc').trim(),date:v('dd'),due:v('du')||v('dd'),desc:v('dx').trim(),qty:+v('dq')||0,price:+v('dp')||0,tax:+v('dt')||0,acct:v('da')};
+
+# if(!f.contact||!f.date||!f.acct||f.qty\*f.price<=0){toast('Add a contact, date, account and an amount above zero');return false}
+
+# if(f.due<f.date){toast('The due date cannot be before the document date');return false}
+
+# if(x)return upDoc(x,f);if(!mkDoc(type,f))return false;sv();render()},x?'Save changes':'Create');dtot()}
+
+# function dtot(){const n=r2((+v('dq')||0)\*(+v('dp')||0)),t=r2(n\*(+v('dt')||0)/100);$('#dtt').innerHTML=`Subtotal ${fm(n)} \&nbsp; Tax ${fm(t)} \&nbsp; <b>Total ${fm(n+t)}</b>`}
+
+# function payForm(id){if(!gd())return;const x=S.docs.find(z=>z.id===id),inv=x.type==='inv',bal=r2(x.total-x.paid);
+
+# modal(inv?'Receive payment for '+x.no:'Pay '+x.no,`<div class="gr"><label>Date<input type="date" id="pd" value="${today()}"></label><label>Amount<input type="number" id="pa" step="0.01" value="${bal}"></label></div><label>${inv?'Deposit to':'Pay from'}<select id="pb">${opt(act('Asset').filter(a=>a.code!=1100))}</select></label><p class="mu">Balance due: ${fm(bal)}</p>`,()=>{const a=r2(+v('pa'));if(a<=0||a>bal+.005){toast('Enter an amount between 0.01 and '+bal.toFixed(2));return false}if(!payDoc(x,v('pd'),a,v('pb')))return false;log('Payment '+fm(a)+' on '+x.no);sv();render()},'Record payment')}
+
+# function voidDoc(id){if(!gd())return;const x=S.docs.find(z=>z.id===id);ask(`Void ${x.no}? Its journal entries and any payments are reversed. This cannot be undone.`,()=>{const J=\[x.je,...x.pays.map(p=>p.je)].map(i=>S.je.find(j=>j.id===i));if(J.some(j=>!chk(j.date)))return;J.forEach(j=>rev(j));x.void=1;log('Voided '+x.no);sv();render()})}
+
+# /\* ---------- journal ---------- \*/
+
+# function vJE(){const T=tJE();T.x=tJL();CUR=T;DR=()=>list(T,i=>{const x=T.L\[i],fr=!x.void\&\&!x.rev\&\&!\['doc','pay'].includes(x.src);return`<button class="lk" onclick="jeView('${x.id}')">View</button>`+(fr?`<button class="lk" onclick="jeForm('${x.id}')">Edit</button><button class="lk d" onclick="voidJE('${x.id}')">Void</button>`:'')});
+
+# return hd('Journal',sr()+ex+`<button class="bt" onclick="$('#fi').click()">Import Excel</button><input type="file" id="fi" hidden accept=".xlsx,.xls,.csv" onchange="imp(this)"><button class="bt p" onclick="jeForm()">New entry</button>`)+`<div class="card" id="tbl">${DR()}</div>`}
+
+# function jeView(id){const x=S.je.find(j=>j.id===id);modal(jn(x)+(x.void?' (void)':''),`<p class="mu">${x.date} \&nbsp; ${e(x.ref||'No reference')} \&nbsp; ${e(x.memo||'')}</p>`+table({head:\['Account','Debit','Credit'],rows:x.lines.map(l=>{const a=ACC(l.a);return\[a?a.code+' '+a.name:'?',l.d||'',l.c||'']}),n:\[1,2]}))}
+
+# function voidJE(id){if(!gd())return;const x=S.je.find(j=>j.id===id);ask('Void '+jn(x)+'? A reversing entry is posted so the audit trail stays complete.',()=>{if(rev(x)){sv();render()}})}
+
+# function jeForm(id){if(!gd())return;const x=id\&\&S.je.find(j=>j.id===id);JL=x?x.lines.map(l=>({...l})):\[{a:'',d:0,c:0},{a:'',d:0,c:0}];
+
+# modal(x?'Edit '+jn(x):'New journal entry',`<div class="gr"><label>Date<input type="date" id="jd" value="${x?x.date:today()}"></label><label>Reference<input id="jr" value="${e(x?x.ref:'')}"></label></div><label>Memo<input id="jm" value="${e(x?x.memo:'')}"></label><div id="jl"></div><p id="jtt"></p><button class="bt" onclick="JL.push({a:'',d:0,c:0});jlr()">Add line</button>`,()=>{
+
+# const date=v('jd'),L=JL.filter(l=>l.a\&\&(l.d||l.c)).map(l=>({a:l.a,d:r2(l.d),c:r2(l.c)}));if(!date||L.length<2){toast('Enter a date and at least two lines');return false}
+
+# if(x){if(!chk(x.date)||!chk(date))return false;const d=r2(L.reduce((s,l)=>s+l.d,0)),c=r2(L.reduce((s,l)=>s+l.c,0));if(d!==c||!d){toast('Debits must equal credits');return false}Object.assign(x,{date,ref:v('jr'),memo:v('jm'),lines:L});log('Edited '+jn(x))}else if(!post(date,v('jr'),v('jm'),L,'man'))return false;sv();render()},x?'Save changes':'Post entry');jlr()}
+
+# function jlr(){const A=act(...TY);$('#jl').innerHTML=`<table class="jt"><tr><th>Account</th><th>Debit</th><th>Credit</th><th></th></tr>${JL.map((l,i)=>`<tr><td><select onchange="JL\[${i}].a=this.value"><option value="">Select…</option>${opt(A,l.a)}</select></td><td><input type="number" step="0.01" min="0" value="${l.d||''}" onchange="sl(${i},'d',this)"></td><td><input type="number" step="0.01" min="0" value="${l.c||''}" onchange="sl(${i},'c',this)"></td><td><button class="lk d" onclick="JL.splice(${i},1);jlr()">Remove</button></td></tr>`).join('')}</table>`;jt()}
+
+# function sl(i,k,el){const o=JL\[i];o\[k]=+el.value||0;if(o\[k]){o\[k==='d'?'c':'d']=0;el.closest('tr').querySelectorAll('input')\[k==='d'?1:0].value=''}jt()}
+
+# function jt(){const d=r2(JL.reduce((s,l)=>s+l.d,0)),c=r2(JL.reduce((s,l)=>s+l.c,0));$('#jtt').innerHTML=`Debit ${fm(d)} \&nbsp; Credit ${fm(c)} \&nbsp; `+(d===c\&\&d?'<b class="ok">Balanced</b>':'<b class="dn">Difference '+fm(r2(d-c))+'</b>')}
+
+# async function imp(inp){if(!gd())return;const f=inp.files\[0];inp.value='';if(!f)return;let R;try{const wb=XLSX.read(await f.arrayBuffer(),{cellDates:true});R=XLSX.utils.sheet\_to\_json(wb.Sheets\[wb.SheetNames\[0]],{raw:false,dateNF:'yyyy-mm-dd',defval:''})}catch(x){return toast('Could not read that file')}
+
+# const G={},num=z=>parseFloat(String(z).replace(/,/g,''))||0,bad=\[];let ok=0;R.forEach(r=>(G\[r.Ref||r.Date]=G\[r.Ref||r.Date]||\[]).push(r));
+
+# Object.entries(G).forEach((\[k,L])=>{const dt=String(L\[0].Date).slice(0,10),ln=L.map(r=>{const s=String(r.Account).trim(),a=S.accts.find(z=>String(z.code)===s.split(' ')\[0]||z.name.toLowerCase()===s.toLowerCase());return{a:a\&\&a.id,d:num(r.Debit),c:num(r.Credit)}});if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(dt)||ln.some(l=>!l.a)||!post(dt,String(L\[0].Ref||''),String(L\[0].Description||''),ln,'imp'))bad.push(k);else ok++});
+
+# sv();render();modal('Import result',`<p><b>${ok}</b> entries imported.</p>${bad.length?`<p class="dn">${bad.length} rejected (unknown account, bad date, locked period or unbalanced): ${e(bad.slice(0,20).join(', '))}</p>`:''}`)}
+
+# function tpl(){const wb=XLSX.utils.book\_new();XLSX.utils.book\_append\_sheet(wb,XLSX.utils.aoa\_to\_sheet(\[\['Date','Ref','Description','Account','Debit','Credit'],\[today(),'R-1','Office rent',6000,1200,0],\[today(),'R-1','Office rent',1000,0,1200]]),'Import');dlf('journal\_import\_template.xlsx',XLSX.write(wb,{type:'array',bookType:'xlsx'}))}
+
+# /\* ---------- chart of accounts ---------- \*/
+
+# function vAcc(){const T=tAcc();CUR=T;DR=()=>list(T,i=>{const a=T.L\[i];return`<button class="lk" onclick="RP={k:'gl',acct:'${a.id}'};go('rep')">Ledger</button><button class="lk" onclick="acctForm('${a.id}')">Edit</button><button class="lk" onclick="togA('${a.id}')">${a.on?'Deactivate':'Activate'}</button>`+(SYS.includes(a.code)||used(a.id)?'':`<button class="lk d" onclick="delA('${a.id}')">Delete</button>`)});
+
+# return hd('Chart of accounts',sr()+ex+'<button class="bt p" onclick="acctForm()">New account</button>')+`<div class="card" id="tbl">${DR()}</div>`}
+
+# function acctForm(id){if(!gd())return;const x=id\&\&ACC(id),lock=x\&\&(SYS.includes(x.code)||used(x.id));
+
+# modal(x?'Edit account':'New account',`<div class="gr"><label>Code<input type="number" id="ac" value="${x?x.code:''}" ${x\&\&SYS.includes(x.code)?'disabled':''}></label><label>Type<select id="at" ${lock?'disabled':''}>${TY.map(t=>`<option${x\&\&x.type===t?' selected':''}>${t}</option>`).join('')}</select></label></div><label>Name<input id="an" value="${e(x?x.name:'')}"></label>${lock?'<p class="mu">The type is locked because this account is in use.</p>':''}`,()=>{
+
+# const code=+v('ac'),name=v('an').trim();if(!code||!name){toast('Enter a code and a name');return false}if(S.accts.some(a=>a.code===code\&\&a!==x)){toast('That account code already exists');return false}
+
+# if(x){Object.assign(x,{code,name,type:v('at')});log('Edited account '+code)}else{S.accts.push({id:uid(),code,name,type:v('at'),on:1});log('Added account '+code+' '+name)}sv();render()})}
+
+# function togA(id){if(!gd())return;const a=ACC(id);a.on=a.on?0:1;log((a.on?'Activated ':'Deactivated ')+a.code);sv();render()}
+
+# function delA(id){if(!ad())return;const a=ACC(id);ask('Delete account '+a.code+' '+e(a.name)+'?',()=>{S.accts=S.accts.filter(z=>z.id!==id);log('Deleted account '+a.code);sv();render()})}
+
+# /\* ---------- reports ---------- \*/
+
+# function vRep(){const R=\[\['tb','Trial balance'],\['pl','Profit and loss'],\['bs','Balance sheet'],\['gl','General ledger'],\['ar','Receivables aging'],\['ap','Payables aging']];if(RP.k==='gl'\&\&!RP.acct)RP.acct=AS()\[0].id;
+
+# const T=({tb:tTB,pl:tPL,bs:tBS,gl:()=>tGL(RP.acct),ar:()=>tAge('inv'),ap:()=>tAge('bill')})\[RP.k](),rg=\['pl','gl'].includes(RP.k);CUR=T;
+
+# return hd('Reports',ex)+`<div class="card pad"><div class="tb"><label>Report<select onchange="RP.k=this.value;render()">${R.map(r=>`<option value="${r\[0]}"${r\[0]===RP.k?' selected':''}>${r\[1]}</option>`).join('')}</select></label>${rg?`<label>From<input type="date" value="${per.from}" onchange="per.from=this.value;render()"></label>`:''}${\['ar','ap'].includes(RP.k)?'':`<label>${rg?'To':'As of'}<input type="date" value="${per.to}" onchange="per.to=this.value;render()"></label>`}${RP.k==='gl'?`<label>Account<select onchange="RP.acct=this.value;render()">${opt(AS(),RP.acct)}</select></label>`:''}</div></div><div class="card"><div class="pad"><h3>${e(S.co.name)}</h3><span class="mu">${e(T.title)} ${e(T.sub||'')}</span></div>${table(T)}${T.note?`<div class="pad ${T.note\[0]==='D'?'ok':'dn'}">${T.note}</div>`:''}</div>`}
+
+# /\* ---------- dashboard ---------- \*/
+
+# function vDash(){const y=today().slice(0,4)+'-01-01',cash=r2(AS().filter(a=>a.type==='Asset'\&\&a.code<1100).reduce((s,a)=>s+nb(a),0)),ti=grp(\['Income'],y,today())\[1],tx=grp(\['Expense'],y,today())\[1],od=S.docs.filter(x=>!x.void\&\&x.type==='inv'\&\&st(x)==='Overdue').length;
+
+# const M=\[];for(let i=5;i>=0;i--){const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-i);M.push(iso(d).slice(0,7))}
+
+# const mt=(ty,k)=>S.je.reduce((s,x)=>x.date.startsWith(k)?s+x.lines.reduce((u,l)=>{const a=ACC(l.a);return a\&\&a.type===ty?u+(ty==='Income'?l.c-l.d:l.d-l.c):u},0):s,0),I=M.map(k=>mt('Income',k)),X=M.map(k=>mt('Expense',k)),mx=Math.max(1,...I,...X);
+
+# const bars=M.map((k,i)=>{const x=34+i\*88,h1=Math.max(0,I\[i])/mx\*120,h2=Math.max(0,X\[i])/mx\*120;return`<rect x="${x}" y="${150-h1}" width="30" height="${h1}" rx="3" fill="var(--pr)"/><rect x="${x+34}" y="${150-h2}" width="30" height="${h2}" rx="3" fill="var(--wn)"/><text x="${x+32}" y="168" text-anchor="middle" font-size="11" fill="var(--mu)">${k.slice(5)}/${k.slice(2,4)}</text>`}).join('');
+
+# const T=tJE(),rc={head:\['No','Date','Memo','Amount'],rows:T.rows.slice(0,6).map(r=>\[r\[0],r\[1],r\[3],r\[4]]),n:\[3]};CUR=null;
+
+# return hd('Dashboard',`<button class="bt" onclick="docForm('bill')">New bill</button><button class="bt" onclick="jeForm()">New journal entry</button><button class="bt p" onclick="docForm('inv')">New invoice</button>`)+
+
+# (S.je.length?'':`<div class="card pad"><h3>Welcome to LedgerPro</h3><p>Your books are empty. Set your company name and tax rate in Settings, review the chart of accounts, then record your first invoice. Or load sample data to explore every screen.</p><div class="tb"><button class="bt p" onclick="demo()">Load sample data</button><button class="bt" onclick="go('set')">Open settings</button></div></div>`)+
+
+# `<div class="kp"><div class="k"><span>Cash at bank</span><b>${fm(cash)}</b></div><div class="k"><span>Receivables</span><b>${fm(nb(BC(1100)))}</b></div><div class="k"><span>Payables</span><b>${fm(nb(BC(2000)))}</b></div><div class="k"><span>Net income this year</span><b class="${ti-tx<0?'dn':''}">${fm(r2(ti-tx))}</b></div><div class="k"><span>Overdue invoices</span><b class="${od?'dn':''}">${od}</b></div></div>
+
+# <div class="card pad"><h3>Income and expenses, last six months</h3><svg viewBox="0 0 560 176" width="100%" role="img" aria-label="Monthly income and expenses"><line x1="20" x2="550" y1="150" y2="150" stroke="var(--bd)"/>${bars}<rect x="400" y="4" width="10" height="10" rx="2" fill="var(--pr)"/><text x="415" y="13" font-size="11" fill="var(--mu)">Income</text><rect x="470" y="4" width="10" height="10" rx="2" fill="var(--wn)"/><text x="485" y="13" font-size="11" fill="var(--mu)">Expenses</text></svg></div>
+
+# <div class="card"><div class="pad"><h3>Recent entries</h3></div>${table(rc)}</div>`}
+
+# /\* ---------- settings ---------- \*/
+
+# function vSet(){const c=S.co,T={title:'Audit Trail',head:\['When','Role','Action'],rows:\[...S.log].reverse().map(l=>\[l.t,l.u,l.m])};CUR=T;DR=()=>list(T);
+
+# return hd('Settings')+`<div class="card pad"><h3>Company</h3><div class="gr"><label>Company name<input id="sn" value="${e(c.name)}"></label><label>Currency symbol<input id="sc" maxlength="4" value="${e(c.cur)}"></label><label>Default tax %<input id="stx" type="number" step="any" value="${c.tax}"></label><label>Lock books through<input id="sl" type="date" value="${c.lock}"></label></div><button class="bt p" onclick="saveSet()">Save settings</button></div>
+
+# <div class="card pad"><h3>Access role</h3><label>Current role<select onchange="setRole(this.value)">${\['Admin','Accountant','Viewer'].map(r=>`<option${r===c.role?' selected':''}>${r}</option>`).join('')}</select></label><p class="mu">Admin can do everything. Accountant can post, edit and void but cannot change settings, delete accounts, restore or erase data. Viewer is read-only. Roles apply on this device and are not a substitute for a server login.</p></div>
+
+# <div class="card pad"><h3>Data</h3><div class="tb"><button class="bt" onclick="allX()">Export all data to Excel</button><button class="bt" onclick="backup()">Back up (JSON)</button><button class="bt" onclick="$('#rf').click()">Restore backup</button><input type="file" id="rf" hidden accept=".json" onchange="restore(this)"><button class="bt" onclick="tpl()">Journal import template</button><button class="bt" onclick="demo()">Load sample data</button><button class="bt" style="color:var(--dn)" onclick="wipe()">Erase everything</button></div></div>
+
+# <div class="ph"><h1>Audit trail</h1><div class="tb">${sr()}${ex}</div></div><div class="card" id="tbl">${DR()}</div>`}
+
+# function saveSet(){if(!ad())return;const t=+v('stx');if(!v('sn').trim()||t<0||t>100){toast('Enter a company name and a tax rate between 0 and 100');return}Object.assign(S.co,{name:v('sn').trim(),cur:v('sc')||'$',tax:t,lock:v('sl')});log('Settings saved. Lock date: '+(S.co.lock||'none'));sv();render();toast('Settings saved')}
+
+# function setRole(r){S.co.role=r;log('Role changed to '+r);sv();render()}
+
+# function backup(){dlf('LedgerPro\_backup\_'+today()+'.json',JSON.stringify(S))}
+
+# async function restore(inp){if(!ad())return;const f=inp.files\[0];inp.value='';if(!f)return;try{const d=JSON.parse(await f.text());if(!d.accts||!d.je||!d.co||!d.docs)throw 0;ask('Restoring replaces all current data. Continue?',()=>{S=d;S.log=S.log||\[];log('Backup restored');sv();render()})}catch(x){toast('That file is not a valid LedgerPro backup')}}
+
+# function wipe(){if(!ad())return;ask('Erase all accounts, entries and settings on this device? Download a backup first. This cannot be undone.',()=>{S=fresh();sv();render()})}
+
+# function demo(){if(!ad())return;S.je.length?ask('Sample data will be added to your existing books. Continue?',addDemo):addDemo()}
+
+# function addDemo(){const A=c=>BC(c).id,t=S.co.tax;S.co.lock='';post(ago(6),'OPEN','Opening capital',\[{a:A(1000),d:30000,c:0},{a:A(3000),d:0,c:30000}]);
+
+# const I=\[\[5,'Acme Corp','Website design',1,3200,4100],\[4,'Globex Ltd','Consulting (10 hrs)',10,150,4100],\[3,'Initech','Product sales',20,85,4000],\[2,'Acme Corp','Support retainer',1,900,4100],\[1,'Umbrella Co','Product sales',12,120,4000],\[0,'Globex Ltd','Consulting (8 hrs)',8,150,4100]].map((\[n,c,ds,qy,p,ac])=>mkDoc('inv',{contact:c,date:ago(n),due:add(ago(n),30),desc:ds,qty:qy,price:p,tax:t,acct:A(ac)}));
+
+# const B=\[\[5,'Landlord Estates','Office rent',1,1200,6000],\[4,'Landlord Estates','Office rent',1,1200,6000],\[3,'City Power','Electricity',1,240,6200],\[2,'Landlord Estates','Office rent',1,1200,6000],\[1,'PrintWorks','Marketing flyers',1,450,6400],\[0,'Landlord Estates','Office rent',1,1200,6000]].map((\[n,c,ds,qy,p,ac])=>mkDoc('bill',{contact:c,date:ago(n),due:add(ago(n),30),desc:ds,qty:qy,price:p,tax:t,acct:A(ac)}));
+
+# \[0,1,2].forEach(i=>payDoc(I\[i],add(I\[i].date,12),I\[i].total,A(1000)));\[0,1,2,3].forEach(i=>payDoc(B\[i],add(B\[i].date,5),B\[i].total,A(1000)));log('Sample data loaded');sv();render()}
+
+# /\* ---------- shell ---------- \*/
+
+# const NAV=\[\['dash','📊','Dashboard'],\['inv','🧾','Sales'],\['bill','🛒','Purchases'],\['je','📒','Journal'],\['acc','🗂️','Accounts'],\['rep','📈','Reports'],\['set','⚙️','Settings']];
+
+# function render(){$('#nav').innerHTML=`<div class="lg">Ledger<i>Pro</i><small>${e(S.co.name)}</small></div>`+NAV.map((\[k,i,l])=>`<button class="${view===k?'on':''}" onclick="go('${k}')"><span>${i}</span>${l}</button>`).join('')+`<div class="rl">Role: ${S.co.role}</div>`;
+
+# $('#main').innerHTML=({dash:vDash,inv:()=>vDocs('inv'),bill:()=>vDocs('bill'),je:vJE,acc:vAcc,rep:vRep,set:vSet})\[view]()}
+
+# const go=k=>{view=k;q='';render();scrollTo(0,0)};
+
+# render();
+
+# </script></body></html>
+
+# &#x20;
+
+
 
