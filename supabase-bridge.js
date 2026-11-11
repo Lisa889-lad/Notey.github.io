@@ -2,7 +2,7 @@
  * Include this file before the application's inline script in index.html.
  * Run supabase/schema.sql in the Supabase SQL Editor first.
  */
-(() => {
+(function() => {
   'use strict';
 
   const APP_KEY = 'ledgerpro_v1';
